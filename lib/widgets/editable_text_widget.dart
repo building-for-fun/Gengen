@@ -4,9 +4,14 @@ import '../providers/template_provider.dart';
 import '../models/text_element.dart';
 
 class EditableTextWidget extends StatefulWidget {
+  final String templateId;
   final TextElement textElement;
 
-  const EditableTextWidget({super.key, required this.textElement});
+  const EditableTextWidget({
+    super.key,
+    required this.templateId,
+    required this.textElement,
+  });
 
   @override
   _EditableTextWidgetState createState() => _EditableTextWidgetState();
@@ -29,30 +34,24 @@ class _EditableTextWidgetState extends State<EditableTextWidget> {
       _position += details.delta;
     });
 
-    Provider.of<TemplateProvider>(context, listen: false).updateTextElement(
+    Provider.of<TemplateProvider>(
+      context,
+      listen: false,
+    ).updateTextElementInTemplate(
+      widget.templateId,
       widget.textElement.id,
       widget.textElement.copyWith(position: _position),
     );
   }
 
   void _updateText(String newText) {
-    Provider.of<TemplateProvider>(context, listen: false).updateTextElement(
+    Provider.of<TemplateProvider>(
+      context,
+      listen: false,
+    ).updateTextElementInTemplate(
+      widget.templateId,
       widget.textElement.id,
       widget.textElement.copyWith(text: newText),
-    );
-  }
-
-  void _updateFontSize(double newSize) {
-    Provider.of<TemplateProvider>(context, listen: false).updateTextElement(
-      widget.textElement.id,
-      widget.textElement.copyWith(fontSize: newSize),
-    );
-  }
-
-  void _updateColor(Color newColor) {
-    Provider.of<TemplateProvider>(context, listen: false).updateTextElement(
-      widget.textElement.id,
-      widget.textElement.copyWith(color: newColor),
     );
   }
 
