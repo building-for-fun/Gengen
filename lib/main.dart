@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Template Designer',
+        title: 'Gengen',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           useMaterial3: true, // Enable Material 3

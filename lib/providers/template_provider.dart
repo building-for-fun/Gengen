@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
-import '../models/template_model.dart';
+import '../models/text_element.dart';
 
-class TemplateProvider with ChangeNotifier {
-  List<TemplateModel> _templates = [];
+class TemplateProvider extends ChangeNotifier {
+  List<TextElement> _textElements = [];
 
-  List<TemplateModel> get templates => _templates;
+  List<TextElement> get textElements => _textElements;
 
-  void addTemplate(TemplateModel template) {
-    _templates.add(template);
+  void addTextElement(String text) {
+    _textElements.add(
+      TextElement(
+        id: DateTime.now().toString(),
+        text: text,
+        position: Offset(100, 100),
+        fontSize: 20,
+        color: Colors.black,
+      ),
+    );
     notifyListeners();
   }
 
-  void updateTemplate(String id, List<Widget> newElements) {
-    final index = _templates.indexWhere((t) => t.id == id);
+  void updateTextElement(String id, TextElement updatedElement) {
+    int index = _textElements.indexWhere((element) => element.id == id);
     if (index != -1) {
-      _templates[index].elements = newElements;
+      _textElements[index] = updatedElement;
       notifyListeners();
     }
   }

@@ -1,35 +1,39 @@
 import 'package:flutter/material.dart';
-import '../widgets/draggable_widget.dart';
+import 'canvas_screen.dart';
 
-class TemplateScreen extends StatefulWidget {
-  @override
-  _TemplateScreenState createState() => _TemplateScreenState();
-}
-
-class _TemplateScreenState extends State<TemplateScreen> {
-  List<Widget> elements = [];
-
-  void addTextElement() {
-    setState(() {
-      elements.add(
-        DraggableWidget(
-          child: Text(
-            "Edit Me",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
-      );
-    });
-  }
-
+class TemplateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Edit Template")),
-      body: Stack(children: [...elements]),
-      floatingActionButton: FloatingActionButton(
-        onPressed: addTextElement,
-        child: Icon(Icons.text_fields),
+      appBar: AppBar(title: Text("Select a Template")),
+      body: GridView.builder(
+        padding: EdgeInsets.all(10),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 1.2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+        ),
+        itemCount: 4, // Change this to dynamic count if needed
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CanvasScreen()),
+              );
+            },
+            child: Card(
+              color: Colors.blueAccent,
+              child: Center(
+                child: Text(
+                  "Template ${index + 1}",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

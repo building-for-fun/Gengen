@@ -5,7 +5,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Template Designer")),
+      appBar: AppBar(title: Text("Gengen")),
       body: Center(
         child: ElevatedButton(
           child: Text("Create New Template"),
